@@ -1,5 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { TestController } from "./test.controller";
+import { TestService } from "./test.service";
 
 describe("TestController", () => {
   let controller: TestController;
@@ -7,6 +8,7 @@ describe("TestController", () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TestController],
+      providers: [TestService],
     }).compile();
 
     controller = module.get<TestController>(TestController);
@@ -14,5 +16,11 @@ describe("TestController", () => {
 
   it("should be defined", () => {
     expect(controller).toBeDefined();
+  });
+
+  describe("root", () => {
+    it("should show the testpage", () => {
+      expect(controller.test()).toBe("This is a test page");
+    });
   });
 });
