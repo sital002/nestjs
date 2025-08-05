@@ -1,16 +1,63 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Sample page</title>
-  </head>
-  <body>
-    <p>
-    This meesage was sent by controller :
-    <p>
-
-    {{ message }}
-    </p>
-    </p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      width: 250px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+    }
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+    .product-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .product-price {
+      color: green;
+      font-weight: bold;
+    }
+    .out-of-stock {
+      color: red;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Product List</h1>
+  <div class="product-list">
+    {{#each products}}
+    <div class="product-card">
+      <img src="{{this.image}}" alt="{{this.name}}">
+      <div class="product-name">{{this.name}}</div>
+      <div>{{this.description}}</div>
+      <div class="product-price">${{this.price}}</div>
+      <div>Category: {{this.category}}</div>
+      <div>Rating: {{this.rating}} ⭐</div>
+      {{#if this.inStock}}
+        <div style="color: green;">In Stock</div>
+      {{else}}
+        <div class="out-of-stock">Out of Stock</div>
+      {{/if}}
+    </div>
+    {{/each}}
+  </div>
+</body>
 </html>
